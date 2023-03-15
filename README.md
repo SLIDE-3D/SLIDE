@@ -1,4 +1,4 @@
-# Controllable Mesh Generation Through Sparse Latent Point Diffusion Models
+# SLIDE: Controllable Mesh Generation Through Sparse Latent Point Diffusion Models
 This repo intends to release code for our work: 
 
 Zhaoyang Lyu\*, Jinyi Wang\*, Yuwei An, Ya Zhang, Dahua Lin, Bo Dai, ["Controllable Mesh Generation Through Sparse Latent Point Diffusion Models"](https://arxiv.org/abs/2303.07938).
