@@ -1,0 +1,60 @@
+{
+    "pointnet_config": {
+        "model_name": "shapenet_psr_batchsize_32",
+        "in_fea_dim": 0,
+        "in_position_and_normal_dim": 3,
+        "out_dim": 6,
+        "include_t": false,
+        "t_dim": 128,
+        "model.use_xyz": true,
+        "attach_position_to_input_feature": true,
+        "include_abs_coordinate": true,
+        "include_center_coordinate": true,
+        "record_neighbor_stats": false,
+        "bn_first": false,
+        "bias": true,
+        "res_connect": true,
+
+        "include_class_condition": true,
+        "num_class": 13,
+        "class_condition_dim": 128,
+
+        "bn": true,
+
+        "include_global_feature": true,
+        "global_feature_remove_last_activation": false,
+        "pnet_global_feature_architecture": "[[3, 32, 32], [64, 64]]",
+
+        "attention_setting": {
+            "use_attention_module": true,
+            "attention_bn": true,
+            "transform_grouped_feat_out": true,
+            "last_activation": false,
+            "add_attention_to_FeatureMapper_module": true
+        },
+        "architecture": {
+            "npoint": "[32, 32]",
+            "radius": "[0, 0]",
+            "neighbor_definition": "nn",
+            "nsample": "[32, 32]",
+            "feature_dim": "[16, 16, 16]",
+            "mlp_depth": 3
+        },
+        "feature_mapper_setting":{
+            "radius": 0,
+            "neighbor_definition": "nn",
+            "nsample": 32,
+            "mlp_depth": 2,
+            "out_dim": 32
+        },
+        "upsampling_setting":{
+            "point_upsample_factor": 16,
+            "first_refine_coarse_points": false,
+            "include_displacement_center_to_final_output": false,
+            "output_scale_factor": 0.03,
+            "num_output_points": 256
+        },
+        "condition_net_architecture": null,
+        "feature_mapper_architecture": null
+    }
+}

@@ -1,0 +1,93 @@
+{
+    "diffusion_config": {
+        "T": 1000,
+        "beta_0": 0.0001,
+        "beta_T": 0.02
+    },
+    "pointnet_config": {
+        "model_name": "shapenet_psr_keypoint_generation_batchsize_32_with_ema_chair",
+        "in_fea_dim": 0,
+        "out_dim": 3,
+        "include_t": true,
+        "t_dim": 128,
+        "model.use_xyz": true,
+        "attach_position_to_input_feature": true,
+        "include_abs_coordinate": true,
+        "include_center_coordinate": true,
+        "record_neighbor_stats": false,
+        "bn_first": false,
+        "bias": true,
+        "res_connect": true,
+
+        "include_class_condition": true,
+        "num_class": 13,
+        "class_condition_dim": 128,
+
+        "bn": true,
+
+        "include_local_feature": false,
+        "include_global_feature": false,
+        "global_feature_remove_last_activation": false,
+        "pnet_global_feature_architecture": "[[4, 128, 256], [512, 1024]]",
+
+        "attention_setting": {
+            "use_attention_module": true,
+            "attention_bn": true,
+            "transform_grouped_feat_out": true,
+            "last_activation": true,
+            "add_attention_to_FeatureMapper_module": true
+        },
+        "architecture": {
+            "npoint": "[16, 16]",
+            "radius": "[0, 0]",
+            "neighbor_definition": "nn",
+            "nsample": "[16, 16]",
+            "feature_dim": "[32, 64, 128]",
+            "mlp_depth": 3,
+            "decoder_feature_dim": "[64, 64, 128]",
+            "include_grouper": false,
+            "decoder_mlp_depth": 2,
+            "use_knn_FP": true,
+            "K": 8
+        },
+        "condition_net_architecture": null,
+        "feature_mapper_architecture": null
+    },
+    "train_config": {
+        "task": "keypoint_generation",
+        "dataset": "shapenet_psr_dataset",
+        "root_directory": "exps/exp_shapenet_psr_generation/ddpm_keypoint_training_exps",
+        "output_directory": "checkpoint",
+        "tensorboard_directory": "tensorboard",
+        "ckpt_iter": "max",
+        "epochs_per_ckpt": 10,
+        "iters_per_logging": 50,
+        "n_epochs": 1001,
+        "eval_start_epoch": 0,
+        "eval_per_ckpt": 1,
+        "learning_rate": 0.0002,
+        "loss_type": "mse",
+        "conditioned_on_cloud": false,
+        "split_dataset_to_multi_gpus": true,
+        "ema_rate": "[0.999, 0.9999]"
+    },
+    "shapenet_psr_dataset_config": {
+        "dataset": "shapenet_psr_dataset",
+        "data_dir": "data/shapenet_psr",
+        "categories": "['03001627']",
+        "npoints": 2048,
+        "scale": 1,
+        "batch_size": 32,
+        "eval_batch_size": 64,
+        "num_workers": 32,
+        "num_samples_tested": 128,
+        "centered_to_centroid": false,
+        "num_keypoints": 16,
+        "keypoints_source": "farthest_points_sampling",
+        "repeat_dataset": 10
+    },
+    "dist_config": {
+        "dist_backend": "nccl",
+        "CUDA_VISIBLE_DEVICES": null
+    }
+}

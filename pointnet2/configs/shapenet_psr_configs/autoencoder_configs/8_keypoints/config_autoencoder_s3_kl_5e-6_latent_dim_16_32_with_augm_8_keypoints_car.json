@@ -1,0 +1,48 @@
+{
+    "pointnet_config": {
+        "model_name": "shapenet_psr_autoencoder_batchsize_32_kl_2e-5_8_kps_noise_0.04_latent_dim_16_32_normal_weight_0_0_0.1_with_augm_not_add_centroid_as_first_kp_car",
+        "apply_kl_regularization": true,
+        "kl_weight": 2e-5,
+        "encoder_config_file": "test_configs_latent_dim_16_32/config_encoder.json",
+        "decoder_config_file": "['test_configs_latent_dim_16_32/decoder_level_1.json', 'test_configs_latent_dim_16_32/decoder_level_2.json', 'test_configs_latent_dim_16_32/decoder_level_3.json']",
+        "feature_weight": "[0,0,0.1]"
+    },
+    "train_config": {
+        "task": "autoencode",
+        "dataset": "shapenet_psr_dataset",
+        "root_directory": "exps/exp_shapenet_psr_generation/autoencoder_exps/8_keypoints",
+        "output_directory": "checkpoint",
+        "tensorboard_directory": "tensorboard",
+        "ckpt_iter": "max",
+        "epochs_per_ckpt": 20,
+        "iters_per_logging": 50,
+        "n_epochs": 601,
+        "eval_start_epoch": 0,
+        "eval_per_ckpt": 1,
+        "learning_rate": 0.001,
+        "loss_type": "mse",
+        "conditioned_on_cloud": false,
+        "split_dataset_to_multi_gpus": true
+    },
+    "shapenet_psr_dataset_config": {
+        "dataset": "shapenet_psr_dataset",
+        "data_dir": "data/shapenet_psr",
+        "categories": "['02958343']",
+        "repeat_dataset": 10,
+        "npoints": 2048,
+        "scale": 1,
+        "batch_size": 32,
+        "eval_batch_size": 64,
+        "num_workers": 16,
+        "num_samples_tested": 128,
+        "num_keypoints": 8,
+        "keypoint_noise_magnitude": 0.04,
+        "add_centroid_to_keypoints": false,
+        "keypoints_source": "farthest_points_sampling",
+        "augmentation": {"mirror_prob": 0.5, "translation_magnitude": 0.1, "augm_scale": 1.2}
+    },
+    "dist_config": {
+        "dist_backend": "nccl",
+        "CUDA_VISIBLE_DEVICES": null
+    }
+}

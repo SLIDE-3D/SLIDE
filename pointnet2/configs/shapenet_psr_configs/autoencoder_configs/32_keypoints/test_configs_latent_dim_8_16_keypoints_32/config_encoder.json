@@ -1,0 +1,44 @@
+{
+    "pointnet_config": {
+        "model_name": "shapenet_psr_batchsize_32",
+        "in_fea_dim": 3,
+        "include_t": false,
+        "t_dim": 128,
+        "model.use_xyz": true,
+        "attach_position_to_input_feature": true,
+        "include_abs_coordinate": true,
+        "include_center_coordinate": true,
+        "record_neighbor_stats": false,
+        "bn_first": false,
+        "bias": true,
+        "res_connect": true,
+
+        "include_class_condition": true,
+        "num_class": 13,
+        "class_condition_dim": 128,
+
+        "bn": true,
+
+        "include_global_feature": false,
+        "global_feature_remove_last_activation": false,
+        "pnet_global_feature_architecture": "[[4, 128, 256], [512, 1024]]",
+
+        "attention_setting": {
+            "use_attention_module": true,
+            "attention_bn": true,
+            "transform_grouped_feat_out": true,
+            "last_activation": true,
+            "add_attention_to_FeatureMapper_module": true
+        },
+        "architecture": {
+            "npoint": "[1024, 256, 64, 32]",
+            "radius": "[0, 0, 0, 0]",
+            "neighbor_definition": "nn",
+            "nsample": "[32, 32, 32, 32]",
+            "feature_dim": "[32, 64, 128, 256, 512]",
+            "mlp_depth": 3
+        },
+        "condition_net_architecture": null,
+        "feature_mapper_architecture": null
+    }
+}

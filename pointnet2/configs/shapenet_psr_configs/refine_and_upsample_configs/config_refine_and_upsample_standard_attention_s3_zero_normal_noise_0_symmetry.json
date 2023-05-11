@@ -1,0 +1,99 @@
+{
+    "pointnet_config": {
+        "model_name": "shapenet_dpsr_zero_normal_upsample_10_noise_0_symmetry",
+        "in_fea_dim": 4,
+        "out_dim": 6,
+        "include_t": false,
+        "t_dim": 128,
+        "model.use_xyz": true,
+        "attach_position_to_input_feature": true,
+        "include_abs_coordinate": true,
+        "include_center_coordinate": true,
+        "record_neighbor_stats": false,
+        "bn_first": false,
+        "bias": true,
+        "res_connect": true,
+
+        "point_upsample_factor": 5,
+        "first_refine_coarse_points": false,
+        "include_displacement_center_to_final_output": false,
+        "output_scale_factor": 0.001,
+
+        "include_class_condition": true,
+        "num_class": 13,
+        "class_condition_dim": 128,
+
+        "bn": true,
+
+        "include_local_feature": false,
+        "include_global_feature": false,
+        "global_feature_remove_last_activation": false,
+        "pnet_global_feature_architecture": "[[4, 128, 256], [512, 1024]]",
+
+        "attention_setting": {
+            "use_attention_module": true,
+            "attention_bn": true,
+            "transform_grouped_feat_out": true,
+            "last_activation": true,
+            "add_attention_to_FeatureMapper_module": true
+        },
+        "architecture": {
+            "npoint": "[1024, 256, 64, 16]",
+            "radius": "[0.1, 0.2, 0.4, 0.8]",
+            "neighbor_definition": "nn",
+            "nsample": "[32, 32, 32, 32]",
+            "feature_dim": "[32, 64, 128, 256, 512]",
+            "mlp_depth": 3,
+            "decoder_feature_dim": "[128, 128, 256, 256, 512]",
+            "include_grouper": false,
+            "decoder_mlp_depth": 2,
+            "use_knn_FP": true,
+            "K": 8
+        },
+        "condition_net_architecture": null,
+        "feature_mapper_architecture": null
+    },
+    "train_config": {
+        "task": "upsample",
+        "dataset": "shapenet_psr_dataset",
+        "root_directory": "exps/exp_shapenet_psr_generation/refine_and_upsampling_exps/no_normal_exps",
+        "output_directory": "checkpoint",
+        "tensorboard_directory": "tensorboard",
+        "ckpt_iter": "max",
+        "epochs_per_ckpt": 10,
+        "iters_per_logging": 50,
+        "n_epochs": 1000,
+        "eval_start_epoch": 0,
+        "eval_per_ckpt": 1,
+        "learning_rate": 0.0002,
+        "loss_type": "mse",
+        "conditioned_on_cloud": false,
+        "split_dataset_to_multi_gpus": true
+    },
+    "dpsr_config":{
+        "grid_res": 128,
+        "psr_sigma": 2,
+        "psr_tanh": true,
+        "mirror_before_upsampling": true,
+        "only_original_points_split": false
+    },
+    "shapenet_psr_dataset_config": {
+        "dataset": "shapenet_psr_dataset",
+        "data_dir": "data/shapenet_psr",
+        "categories": null,
+        "npoints": 2048,
+        "scale": 1,
+        "batch_size": 32,
+        "eval_batch_size": 32,
+        "num_workers": 16,
+        "load_psr": true,
+        "augmentation": {"noise_magnitude": 0},
+        "num_vis_samples": 32,
+        "external_vis_dataset": null,
+        "include_normals": false
+    },
+    "dist_config": {
+        "dist_backend": "nccl",
+        "CUDA_VISIBLE_DEVICES": null
+    }
+}
