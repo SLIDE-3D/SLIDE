@@ -15,7 +15,7 @@ Samples generated in this latent space are decoded back to point clouds by a neu
 
 
 # Set up the environment
-The code is tested with Pytorch 1.12.1, CUDA 11.3, and gcc 5.4.0 or 7.3.1 (Other gcc verions may work as well, but we have not tested them.).
+The code is tested with Pytorch 1.12.1, CUDA 11.3, and gcc 5.4.0, 7.3.1, or 9.4.0 (Other gcc verions may work as well, but we have not tested them.).
 Run the following command to setup the environment:
 ```
 conda env create -f environment.yml
