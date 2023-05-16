@@ -819,7 +819,6 @@ class PointnetKnnFPModule(nn.Module):
             # and the weight (inversely proportional to distance) of the K neighbors
 
             second_condition_emb = second_condition_emb if self.include_second_condition else None
-            pdb.set_trace()
             grouped_feats_out = self.mlp1(grouped_feats, t_emb=None, condition_emb=second_condition_emb)
             # grouped_feats_out is of shape (B, mlp1[-1],n,K), 
             # grouped_feats go through a shared mlp that transforms the dimension of the channel dimension
