@@ -9,6 +9,7 @@ from pointnet2_ops import pointnet2_utils
 from pointnet2_ops.attention import AttentionModule, GlobalAttentionModule
 
 import copy
+import pdb
 
 def swish(x):
     return x * torch.sigmoid(x)
